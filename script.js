@@ -1141,6 +1141,125 @@ const RgbaConverter = (() => {
 
 
 // ================================================================
+// SECCIÓN 7 — CONVERSOR HEX ↔ RGB 🎯
+// ================================================================
+const RgbConverter = (() => {
+
+  const hexIn      = document.getElementById('simpleHexInput');
+  const hexMini    = document.getElementById('simpleHexMini');
+  const hexToBtn   = document.getElementById('simpleHexToRgbBtn');
+  const rgbOut     = document.getElementById('simpleRgbOut');
+  const rOut       = document.getElementById('simpleROut');
+  const gOut       = document.getElementById('simpleGOut');
+  const bOut       = document.getElementById('simpleBOut');
+
+  const rIn        = document.getElementById('simpleR');
+  const gIn        = document.getElementById('simpleG');
+  const bIn        = document.getElementById('simpleB');
+  const rSlider    = document.getElementById('simpleRSlider');
+  const gSlider    = document.getElementById('simpleGSlider');
+  const bSlider    = document.getElementById('simpleBSlider');
+  const rDisp      = document.getElementById('simpleRDisp');
+  const gDisp      = document.getElementById('simpleGDisp');
+  const bDisp      = document.getElementById('simpleBDisp');
+  const rgbToBtn   = document.getElementById('simpleRgbToHexBtn');
+  const hexOut     = document.getElementById('simpleHexOut');
+  const cssOut     = document.getElementById('simpleCssOut');
+  const swatch     = document.getElementById('rgbConvSwatch');
+  const swatchVal  = document.getElementById('rgbConvSwatchValue');
+  const picker     = document.getElementById('rgbDirectPicker');
+
+  function updateSwatch(r,g,b){
+    const hex=`#${n2h(r)}${n2h(g)}${n2h(b)}`;
+    swatch.style.background=hex;
+    swatch.style.boxShadow=`0 0 30px ${hex}66`;
+    swatchVal.textContent=hex.toUpperCase()+` — rgb(${r}, ${g}, ${b})`;
+    picker.value=hex;
+    updateSliderColors(r,g,b);
+  }
+
+  function updateSliderColors(r,g,b){
+    rSlider.style.background=`linear-gradient(to right,rgb(0,${g},${b}),rgb(255,${g},${b}))`;
+    gSlider.style.background=`linear-gradient(to right,rgb(${r},0,${b}),rgb(${r},255,${b}))`;
+    bSlider.style.background=`linear-gradient(to right,rgb(${r},${g},0),rgb(${r},${g},255))`;
+  }
+
+  function doHexToRgb(){
+    let raw=hexIn.value.trim().replace('#','');
+    if(raw.length===3) raw=raw.split('').map(c=>c+c).join('');
+    if(raw.length!==6||!/^[0-9a-fA-F]{6}$/.test(raw)){
+      rgbOut.textContent='HEX inválido (usa 6 dígitos)'; return;
+    }
+    const r=parseInt(raw.slice(0,2),16);
+    const g=parseInt(raw.slice(2,4),16);
+    const b=parseInt(raw.slice(4,6),16);
+    rgbOut.textContent=`rgb(${r}, ${g}, ${b})`;
+    rOut.textContent=r; gOut.textContent=g; bOut.textContent=b;
+    hexMini.style.background=`#${raw}`;
+    // Sincronizar panel RGB
+    rIn.value=r; gIn.value=g; bIn.value=b;
+    rSlider.value=r; gSlider.value=g; bSlider.value=b;
+    rDisp.textContent=r; gDisp.textContent=g; bDisp.textContent=b;
+    updateSwatch(r,g,b);
+  }
+
+  function doRgbToHex(){
+    const r=Math.round(Math.max(0,Math.min(255,+rIn.value)));
+    const g=Math.round(Math.max(0,Math.min(255,+gIn.value)));
+    const b=Math.round(Math.max(0,Math.min(255,+bIn.value)));
+    const hex=`#${n2h(r)}${n2h(g)}${n2h(b)}`.toUpperCase();
+    hexOut.textContent=hex;
+    cssOut.textContent=`rgb(${r}, ${g}, ${b})`;
+    hexIn.value=hex;
+    hexMini.style.background=hex;
+    updateSwatch(r,g,b);
+  }
+
+  // Sincronizar sliders ↔ inputs numéricos
+  [[rSlider,rIn,rDisp],[gSlider,gIn,gDisp],[bSlider,bIn,bDisp]].forEach(([sl,inp,disp])=>{
+    sl.addEventListener('input',()=>{
+      inp.value=sl.value; disp.textContent=sl.value;
+      doRgbToHex();
+    });
+    inp.addEventListener('input',()=>{
+      sl.value=inp.value; disp.textContent=inp.value;
+      doRgbToHex();
+    });
+  });
+
+  // Actualizar en tiempo real al escribir HEX
+  hexIn.addEventListener('input',()=>{
+    const raw=hexIn.value.trim().replace('#','');
+    if(raw.length===6&&/^[0-9a-fA-F]{6}$/.test(raw)) doHexToRgb();
+    else hexMini.style.background='transparent';
+  });
+  hexIn.addEventListener('keydown',e=>{ if(e.key==='Enter') doHexToRgb(); });
+  hexToBtn.addEventListener('click', doHexToRgb);
+  rgbToBtn.addEventListener('click', doRgbToHex);
+
+  // Picker de color directo
+  picker.addEventListener('input',e=>{
+    const hex=e.target.value;
+    hexIn.value=hex;
+    doHexToRgb();
+  });
+
+  // Botones copiar
+  document.querySelectorAll('#rgb-converter .copy-btn[data-target]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const el=document.getElementById(btn.dataset.target);
+      if(el&&el.textContent!=='—') copyToClipboard(el.textContent.trim());
+    });
+  });
+
+  function init(){
+    doRgbToHex();
+  }
+  return{init};
+})();
+
+
+// ================================================================
 // NAVEGACIÓN
 // ================================================================
 const Navigation = (() => {
@@ -1171,6 +1290,7 @@ document.addEventListener('DOMContentLoaded', () => {
   GameGradient.init();
   TextStyler.init();
   RgbaConverter.init();
+  RgbConverter.init();
   EmojiLibrary.init();
   console.log('💎 NIXBOX DECORER v3 — iniciado correctamente.');
 });
