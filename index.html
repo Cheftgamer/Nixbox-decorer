@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💎 NIXBOX DECORER</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="a.icon" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">💎</span>
+        <span class="logo-text">NIXBOX <em>DECORER</em></span>
+      </div>
+      <nav class="main-nav" id="mainNav">
+        <a href="#color-master"    class="nav-link" data-section="color-master">    <span class="nav-icon">🎨</span><span>Maestro de Color</span></a>
+        <a href="#gradient-forge"  class="nav-link" data-section="gradient-forge">  <span class="nav-icon">🔥</span><span>Forja de Degradados</span></a>
+        <a href="#game-gradient"   class="nav-link" data-section="game-gradient">   <span class="nav-icon">🎮</span><span>Degradado para Juegos</span></a>
+        <a href="#text-styler"     class="nav-link" data-section="text-styler">     <span class="nav-icon">✍️</span><span>Estilizador de Texto</span></a>
+        <a href="#rgba-converter"  class="nav-link" data-section="rgba-converter">  <span class="nav-icon">🔄</span><span>Conversor RGBA/HEX</span></a>
+        <a href="#emoji-library"   class="nav-link" data-section="emoji-library">   <span class="nav-icon">😀</span><span>Emojis</span></a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">✦ Kit de Herramientas de Diseño Profesional ✦</p>
+    <h1 class="hero-title">Diseña. Estila.<br><span class="accent">Crea.</span></h1>
+    <p class="hero-sub">Tu kit de herramientas de diseño todo-en-uno: colores, degradados, texto especial y conversores al alcance de un clic.</p>
+    <a href="#color-master" class="hero-cta">Comenzar <span aria-hidden="true">→</span></a>
+  </section>
+
+  <main class="main-content">
+
+    <!-- ================================================
+         SECCIÓN 1: MAESTRO DE COLOR 🎨
+    ================================================ -->
+    <section id="color-master" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">01</span>
+        <h2><span class="emoji">🎨</span> Maestro de Color</h2>
+        <p>Selecciona cualquier color y obtén sus códigos HEX, RGB y HSL al instante.</p>
+      </div>
+      <div class="card">
+        <div class="color-picker-area">
+          <div class="picker-visual">
+            <input type="color" id="mainColorPicker" value="#6C63FF" aria-label="Selector de color principal" />
+            <div class="color-swatch-large" id="colorSwatchLarge"></div>
+          </div>
+          <div class="hsl-sliders">
+            <label><span>H — Tono <strong id="hueVal">258</strong>°</span>
+              <input type="range" id="sliderH" min="0" max="360" value="258" class="slider slider-h" /></label>
+            <label><span>S — Saturación <strong id="satVal">100</strong>%</span>
+              <input type="range" id="sliderS" min="0" max="100" value="100" class="slider slider-s" /></label>
+            <label><span>L — Luminosidad <strong id="litVal">69</strong>%</span>
+              <input type="range" id="sliderL" min="0" max="100" value="69" class="slider slider-l" /></label>
+          </div>
+        </div>
+        <div class="color-codes">
+          <div class="code-block">
+            <span class="code-label">HEX</span>
+            <span class="code-value" id="hexValue">#6C63FF</span>
+            <button class="copy-btn" data-target="hexValue" aria-label="Copiar HEX">📋</button>
+          </div>
+          <div class="code-block">
+            <span class="code-label">RGB</span>
+            <span class="code-value" id="rgbValue">rgb(108, 99, 255)</span>
+            <button class="copy-btn" data-target="rgbValue" aria-label="Copiar RGB">📋</button>
+          </div>
+          <div class="code-block">
+            <span class="code-label">HSL</span>
+            <span class="code-value" id="hslValue">hsl(244, 100%, 69%)</span>
+            <button class="copy-btn" data-target="hslValue" aria-label="Copiar HSL">📋</button>
+          </div>
+        </div>
+        <div class="palette-section">
+          <h3 class="sub-title">✦ Paletas Sugeridas</h3>
+          <div class="palette-grid" id="paletteGrid"></div>
+        </div>
+        <div class="palette-section">
+          <h3 class="sub-title">Claros y Oscuros del color actual</h3>
+          <div class="tints-row" id="tintsRow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECCIÓN 2: FORJA DE DEGRADADOS CSS 🔥
+    ================================================ -->
+    <section id="gradient-forge" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">02</span>
+        <h2><span class="emoji">🔥</span> Forja de Degradados</h2>
+        <p>Construye degradados CSS con vista previa en tiempo real. Copia el código listo para usar.</p>
+      </div>
+      <div class="card">
+        <div class="gradient-preview" id="gradientPreview"></div>
+        <div class="gradient-controls">
+          <div class="control-group">
+            <label class="control-label">Tipo de Degradado</label>
+            <div class="toggle-group">
+              <button class="toggle-btn active" data-type="linear">⟶ Lineal</button>
+              <button class="toggle-btn" data-type="radial">◎ Radial</button>
+              <button class="toggle-btn" data-type="conic">↻ Cónico</button>
+            </div>
+          </div>
+          <div class="control-group" id="angleGroup">
+            <label class="control-label">Ángulo: <strong id="angleDisplay">135</strong>°</label>
+            <input type="range" id="angleSlider" min="0" max="360" value="135" class="slider" />
+          </div>
+          <div class="control-group">
+            <label class="control-label">Colores del Degradado</label>
+            <div class="color-stops" id="colorStops"></div>
+            <button class="add-stop-btn" id="addStopBtn">＋ Agregar Color</button>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Estilos Populares</label>
+            <div class="preset-grid" id="presetGrid"></div>
+          </div>
+        </div>
+        <div class="css-output">
+          <div class="code-header">
+            <span>Código CSS Generado</span>
+            <button class="copy-btn-wide" id="copyGradientBtn">📋 Copiar Código</button>
+          </div>
+          <pre class="css-code" id="gradientCSS"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECCIÓN 3: DEGRADADO PARA JUEGOS 🎮
+         Texto con colores RGB por letra, estilo Minecraft
+    ================================================ -->
+    <section id="game-gradient" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">03</span>
+        <h2><span class="emoji">🎮</span> Degradado para Juegos</h2>
+        <p>Genera texto con degradado de colores para Minecraft, Discord, servidores y más. Cada letra lleva su propio color RGB.</p>
+      </div>
+      <div class="card">
+
+        <!-- Input del texto -->
+        <div class="text-input-area">
+          <label for="gameText" class="control-label">Tu Texto</label>
+          <textarea id="gameText" rows="2" placeholder="Escribe tu nombre, título o mensaje...">NIXBOX</textarea>
+        </div>
+
+        <!-- Colores del degradado -->
+        <div class="control-group" style="margin-bottom:1.2rem">
+          <label class="control-label">Colores del Degradado (arrastra para reordenar)</label>
+          <div class="game-color-stops" id="gameColorStops"></div>
+          <div style="display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap">
+            <button class="add-stop-btn" id="addGameColor">＋ Agregar Color</button>
+            <button class="ghost-btn" id="reverseGameColors">🔄 Invertir</button>
+          </div>
+        </div>
+
+        <!-- Vista previa animada del texto con colores -->
+        <div class="game-preview-box">
+          <div class="game-preview-label">Vista Previa</div>
+          <div class="game-preview-text" id="gamePreviewText"></div>
+        </div>
+
+        <!-- Formato de salida -->
+        <div class="control-group" style="margin-top:1.2rem">
+          <label class="control-label">Formato de Salida</label>
+          <div class="toggle-group fmt-grid" id="gameFormatBtns">
+            <button class="toggle-btn active" data-fmt="default_hex"  title="Default &#rrggbb">⛏️ Default</button>
+            <button class="toggle-btn"        data-fmt="chat_hex"     title="Chat &lt;#rrggbb&gt;">💬 Chat</button>
+            <button class="toggle-btn"        data-fmt="legacy_rgb"   title="Legacy &amp;x&amp;r...">📜 Legacy</button>
+            <button class="toggle-btn"        data-fmt="nick_hex"     title="Nick &#rrggbb">👤 Nick</button>
+            <button class="toggle-btn"        data-fmt="nick_special" title="Nick Special &lt;#rrggbb&gt;">✨ Nick Special</button>
+            <button class="toggle-btn"        data-fmt="console_rgb"  title="Console §x§r§r§g§g§b§b">🖥️ Console</button>
+            <button class="toggle-btn"        data-fmt="bbcode_color" title="BBCode [COLOR=#rrggbb]">📋 BBCode</button>
+            <button class="toggle-btn"        data-fmt="motd_unicode" title="MOTD \u00A7x">📡 MOTD</button>
+            <button class="toggle-btn"        data-fmt="html">🌐 HTML</button>
+            <button class="toggle-btn"        data-fmt="discord">🔵 Discord</button>
+          </div>
+        </div>
+
+        <!-- Opciones de estilo -->
+        <div class="control-group" style="margin-top:1rem">
+          <label class="control-label">Decoraciones</label>
+          <div class="style-toggles" id="gameStyleToggles">
+            <button class="style-toggle-btn" data-style="bold">𝗡 Negrita</button>
+            <button class="style-toggle-btn" data-style="italic">𝘐 Cursiva</button>
+            <button class="style-toggle-btn" data-style="underline">U̲ Subrayado</button>
+            <button class="style-toggle-btn" data-style="strike">S̶ Tachado</button>
+          </div>
+        </div>
+
+        <!-- Salida de código -->
+        <div class="css-output" style="margin-top:1rem">
+          <div class="code-header">
+            <span id="gameOutputLabel">Código Generado</span>
+            <button class="copy-btn-wide" id="copyGameOutput">📋 Copiar Código</button>
+          </div>
+          <pre class="css-code" id="gameOutput" style="white-space:pre-wrap;word-break:break-all"></pre>
+        </div>
+
+        <!-- Presets de colores de juegos -->
+        <div class="palette-section" style="margin-top:1.5rem">
+          <h3 class="sub-title">🎨 Paletas de Juegos Populares</h3>
+          <div class="game-presets-grid" id="gamePresetsGrid"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECCIÓN 4: ESTILIZADOR DE TEXTO ✍️
+    ================================================ -->
+    <section id="text-styler" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">04</span>
+        <h2><span class="emoji">✍️</span> Estilizador de Texto</h2>
+        <p>Convierte tu texto a estilos especiales Unicode: superíndice ˢᵘᵖ, subíndice ₛᵤᵦ, versalitas ꜱᴍᴀʟʟ ᴄᴀᴘꜱ y muchos más.</p>
+      </div>
+      <div class="card">
+        <div class="text-input-area">
+          <label for="inputText" class="control-label">Tu Texto</label>
+          <textarea id="inputText" rows="3" placeholder="Escribe aquí tu texto...">NIXBOX DECORER</textarea>
+          <div class="input-actions">
+            <button class="ghost-btn" id="clearTextBtn">✕ Limpiar</button>
+            <span class="char-count"><span id="charCount">14</span> caracteres</span>
+          </div>
+        </div>
+        <div class="styles-grid" id="stylesGrid"></div>
+        <div class="style-preview-area" id="stylePreviewArea" style="display:none">
+          <h3 class="sub-title">Vista Previa</h3>
+          <div class="style-preview-text" id="stylePreviewText"></div>
+          <div class="preview-actions">
+            <span class="selected-style-name" id="selectedStyleName"></span>
+            <button class="copy-btn-wide" id="copyStyledText">📋 Copiar Texto</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECCIÓN 5: CONVERSOR RGBA / HEX 🔄
+    ================================================ -->
+    <section id="rgba-converter" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">05</span>
+        <h2><span class="emoji">🔄</span> Conversor RGBA ↔ HEX</h2>
+        <p>Convierte colores entre formato RGBA y HEX (con canal alfa). Resultados instantáneos y copiables.</p>
+      </div>
+      <div class="card">
+
+        <!-- Vista previa del color convertido -->
+        <div class="converter-preview">
+          <div class="conv-swatch" id="convSwatch"></div>
+          <div class="conv-swatch-info">
+            <span id="convSwatchLabel">Color actual</span>
+            <span id="convSwatchValue" class="conv-swatch-hex"></span>
+          </div>
+        </div>
+
+        <!-- Dos paneles lado a lado -->
+        <div class="converter-panels">
+
+          <!-- Panel HEX → RGBA -->
+          <div class="conv-panel">
+            <h3 class="sub-title">HEX → RGBA</h3>
+            <div class="conv-input-row">
+              <div class="conv-field">
+                <label class="conv-field-label">HEX (con o sin #)</label>
+                <input type="text" id="hexInput" class="conv-input" placeholder="#6C63FFff" maxlength="9" spellcheck="false" />
+              </div>
+              <div class="conv-field small">
+                <label class="conv-field-label">Previsualizar</label>
+                <div class="conv-mini-swatch" id="hexMiniSwatch"></div>
+              </div>
+            </div>
+            <button class="hero-cta conv-btn" id="hexToRgbaBtn">Convertir →</button>
+            <div class="conv-result" id="hexToRgbaResult">
+              <div class="code-block"><span class="code-label">RGBA</span><span class="code-value" id="hexRgbaOut">—</span><button class="copy-btn" data-target="hexRgbaOut">📋</button></div>
+              <div class="code-block"><span class="code-label">RGB</span><span class="code-value" id="hexRgbOut">—</span><button class="copy-btn" data-target="hexRgbOut">📋</button></div>
+              <div class="code-block"><span class="code-label">Alfa %</span><span class="code-value" id="hexAlphaOut">—</span><button class="copy-btn" data-target="hexAlphaOut">📋</button></div>
+            </div>
+          </div>
+
+          <!-- Panel RGBA → HEX -->
+          <div class="conv-panel">
+            <h3 class="sub-title">RGBA → HEX</h3>
+            <div class="conv-input-row">
+              <div class="conv-field small-2">
+                <label class="conv-field-label">R (0-255)</label>
+                <input type="number" id="convR" class="conv-input conv-num" min="0" max="255" value="108" />
+              </div>
+              <div class="conv-field small-2">
+                <label class="conv-field-label">G (0-255)</label>
+                <input type="number" id="convG" class="conv-input conv-num" min="0" max="255" value="99" />
+              </div>
+              <div class="conv-field small-2">
+                <label class="conv-field-label">B (0-255)</label>
+                <input type="number" id="convB" class="conv-input conv-num" min="0" max="255" value="255" />
+              </div>
+              <div class="conv-field small-2">
+                <label class="conv-field-label">A (0-1)</label>
+                <input type="number" id="convA" class="conv-input conv-num" min="0" max="1" step="0.01" value="1" />
+              </div>
+            </div>
+            <!-- Slider de alfa visual -->
+            <label class="control-label" style="margin-top:.8rem">Alfa: <strong id="alphaDisplay">1.00</strong></label>
+            <input type="range" id="alphaSlider" min="0" max="1" step="0.01" value="1" class="slider slider-alpha" />
+            <button class="hero-cta conv-btn" id="rgbaToHexBtn">Convertir →</button>
+            <div class="conv-result" id="rgbaToHexResult">
+              <div class="code-block"><span class="code-label">HEX8</span><span class="code-value" id="rgbaHexOut">—</span><button class="copy-btn" data-target="rgbaHexOut">📋</button></div>
+              <div class="code-block"><span class="code-label">HEX6</span><span class="code-value" id="rgbaHex6Out">—</span><button class="copy-btn" data-target="rgbaHex6Out">📋</button></div>
+              <div class="code-block"><span class="code-label">CSS rgba()</span><span class="code-value" id="rgbaCssOut">—</span><button class="copy-btn" data-target="rgbaCssOut">📋</button></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tabla de referencia de valores alfa -->
+        <div class="palette-section" style="margin-top:1.5rem">
+          <h3 class="sub-title">📊 Referencia Rápida de Alfa (Opacidad)</h3>
+          <div class="alpha-table" id="alphaTable"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================================================
+         SECCIÓN 6: BIBLIOTECA DE EMOJIS 😀
+    ================================================ -->
+    <section id="emoji-library" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">06</span>
+        <h2><span class="emoji">😀</span> Biblioteca de Emojis</h2>
+        <p>Busca entre más de 1.800 emojis, filtra por categoría y copia al instante con un clic.</p>
+      </div>
+      <div class="card">
+
+        <!-- Barra de búsqueda -->
+        <div class="emoji-search-bar">
+          <input type="text" id="emojiSearch" placeholder="🔍 Buscar emoji... (ej: corazón, fuego, gato)" autocomplete="off" />
+          <span class="emoji-count-badge" id="emojiCountBadge">0 emojis</span>
+        </div>
+
+        <!-- Filtros de categoría -->
+        <div class="emoji-cats" id="emojiCats"></div>
+
+        <!-- Grid de emojis -->
+        <div class="emoji-grid" id="emojiGrid"></div>
+
+        <!-- Toast de emoji copiado con preview -->
+        <div class="emoji-copy-bar" id="emojiCopyBar" style="display:none">
+          <span class="emoji-copy-preview" id="emojiCopyPreview"></span>
+          <span class="emoji-copy-msg">¡Copiado!</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>💎 <strong>NIXBOX DECORER</strong> Att cheft_dev&nbsp;·&nbsp; CSS puro</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">✅ ¡Copiado al portapapeles!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
