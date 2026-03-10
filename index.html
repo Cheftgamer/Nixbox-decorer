@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💎 NIXBOX DECORER</title>
+  <title>💎 NIXBOX DECORER — Kit de Diseño</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="a.icon" type="image/x-icon">
+  <link rel="icon" type="image/x-icon" href="a.icon">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
 </head>
@@ -30,6 +30,7 @@
         <a href="#game-gradient"   class="nav-link" data-section="game-gradient">   <span class="nav-icon">🎮</span><span>Degradado para Juegos</span></a>
         <a href="#text-styler"     class="nav-link" data-section="text-styler">     <span class="nav-icon">✍️</span><span>Estilizador de Texto</span></a>
         <a href="#rgba-converter"  class="nav-link" data-section="rgba-converter">  <span class="nav-icon">🔄</span><span>Conversor RGBA/HEX</span></a>
+        <a href="#rgb-converter"   class="nav-link" data-section="rgb-converter">   <span class="nav-icon">🎯</span><span>Conversor HEX/RGB</span></a>
         <a href="#emoji-library"   class="nav-link" data-section="emoji-library">   <span class="nav-icon">😀</span><span>Emojis</span></a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú">
@@ -343,6 +344,95 @@
 
 
     <!-- ================================================
+         SECCIÓN 7: CONVERSOR HEX ↔ RGB 🎯
+    ================================================ -->
+    <section id="rgb-converter" class="tool-section">
+      <div class="section-header">
+        <span class="section-badge">07</span>
+        <h2><span class="emoji">🎯</span> Conversor HEX ↔ RGB</h2>
+        <p>Convierte colores entre HEX y RGB puro (sin canal alfa). Simple, rápido y copiable al instante.</p>
+      </div>
+      <div class="card">
+
+        <!-- Swatch de vista previa -->
+        <div class="converter-preview">
+          <div class="conv-swatch" id="rgbConvSwatch"></div>
+          <div class="conv-swatch-info">
+            <span>Color actual</span>
+            <span id="rgbConvSwatchValue" class="conv-swatch-hex"></span>
+          </div>
+        </div>
+
+        <div class="converter-panels">
+
+          <!-- Panel HEX → RGB -->
+          <div class="conv-panel">
+            <h3 class="sub-title">HEX → RGB</h3>
+            <div class="conv-input-row">
+              <div class="conv-field">
+                <label class="conv-field-label">HEX (con o sin #)</label>
+                <input type="text" id="simpleHexInput" class="conv-input" placeholder="#6C63FF" maxlength="7" spellcheck="false" />
+              </div>
+              <div class="conv-field small">
+                <label class="conv-field-label">Preview</label>
+                <div class="conv-mini-swatch" id="simpleHexMini"></div>
+              </div>
+            </div>
+            <button class="hero-cta conv-btn" id="simpleHexToRgbBtn">Convertir →</button>
+            <div class="conv-result" id="simpleHexToRgbResult">
+              <div class="code-block"><span class="code-label">RGB</span><span class="code-value" id="simpleRgbOut">—</span><button class="copy-btn" data-target="simpleRgbOut">📋</button></div>
+              <div class="code-block"><span class="code-label">R</span><span class="code-value" id="simpleROut">—</span><button class="copy-btn" data-target="simpleROut">📋</button></div>
+              <div class="code-block"><span class="code-label">G</span><span class="code-value" id="simpleGOut">—</span><button class="copy-btn" data-target="simpleGOut">📋</button></div>
+              <div class="code-block"><span class="code-label">B</span><span class="code-value" id="simpleBOut">—</span><button class="copy-btn" data-target="simpleBOut">📋</button></div>
+            </div>
+          </div>
+
+          <!-- Panel RGB → HEX -->
+          <div class="conv-panel">
+            <h3 class="sub-title">RGB → HEX</h3>
+            <div class="conv-input-row">
+              <div class="conv-field small-2">
+                <label class="conv-field-label">R (0-255)</label>
+                <input type="number" id="simpleR" class="conv-input conv-num" min="0" max="255" value="108" />
+              </div>
+              <div class="conv-field small-2">
+                <label class="conv-field-label">G (0-255)</label>
+                <input type="number" id="simpleG" class="conv-input conv-num" min="0" max="255" value="99" />
+              </div>
+              <div class="conv-field small-2">
+                <label class="conv-field-label">B (0-255)</label>
+                <input type="number" id="simpleB" class="conv-input conv-num" min="0" max="255" value="255" />
+              </div>
+            </div>
+            <!-- Sliders visuales por canal -->
+            <label class="control-label" style="margin-top:.8rem">R: <strong id="simpleRDisp">108</strong></label>
+            <input type="range" id="simpleRSlider" min="0" max="255" value="108" class="slider" style="background:linear-gradient(to right,#000,#ff0000)" />
+            <label class="control-label" style="margin-top:.4rem">G: <strong id="simpleGDisp">99</strong></label>
+            <input type="range" id="simpleGSlider" min="0" max="255" value="99"  class="slider" style="background:linear-gradient(to right,#000,#00ff00)" />
+            <label class="control-label" style="margin-top:.4rem">B: <strong id="simpleBDisp">255</strong></label>
+            <input type="range" id="simpleBSlider" min="0" max="255" value="255" class="slider" style="background:linear-gradient(to right,#000,#0000ff)" />
+            <button class="hero-cta conv-btn" id="simpleRgbToHexBtn" style="margin-top:.8rem">Convertir →</button>
+            <div class="conv-result" id="simpleRgbToHexResult">
+              <div class="code-block"><span class="code-label">HEX</span><span class="code-value" id="simpleHexOut">—</span><button class="copy-btn" data-target="simpleHexOut">📋</button></div>
+              <div class="code-block"><span class="code-label">CSS rgb()</span><span class="code-value" id="simpleCssOut">—</span><button class="copy-btn" data-target="simpleCssOut">📋</button></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Picker de color directo -->
+        <div class="palette-section" style="margin-top:1.5rem">
+          <h3 class="sub-title">🎨 Seleccionar color directamente</h3>
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.6rem">
+            <input type="color" id="rgbDirectPicker" value="#6C63FF" style="width:56px;height:56px;border:none;border-radius:12px;cursor:pointer;background:none;" />
+            <span style="color:var(--text-dim);font-size:.875rem">Haz clic para abrir el selector — los campos se actualizan automáticamente</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================
          SECCIÓN 6: BIBLIOTECA DE EMOJIS 😀
     ================================================ -->
     <section id="emoji-library" class="tool-section">
@@ -377,7 +467,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>💎 <strong>NIXBOX DECORER</strong> Att cheft_dev&nbsp;·&nbsp; CSS puro</p>
+    <p>💎 <strong>NIXBOX DECORER</strong> — Kit de Diseño &nbsp;·&nbsp; Hecho con ❤️ y CSS puro</p>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite">✅ ¡Copiado al portapapeles!</div>
